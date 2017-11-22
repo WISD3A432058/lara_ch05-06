@@ -65,8 +65,7 @@ Route::group(['prefix'=>'student'], function () {
         })->where(['subject'=>'(chinese | english | math)']);
     });
 
-//路由命名
-Route::pattern('student_no','s [0-9] {10}');
+
 Route::group(['prefix'=>'student'], function () {
     Route::get('{student_no}',['as'=>'student','users'=> function ($student_no) {
         return "學號:" . $student_no;
@@ -78,8 +77,11 @@ Route::group(['prefix'=>'student'], function () {
     ])->where(['subject'=>'(chinese | english | math)']);
 });
 
-//修改根路由'/'，使之可執行HomeController的indexc函數
-Route::get('/','HomeController@index');
+*/
+
+///路由命名
+Route::pattern('student_no','s [0-9] {10}');
+
 
 Route::group(['prefix'=>'student'], function () {
     Route::get('{student_no}',[
@@ -92,10 +94,13 @@ Route::group(['prefix'=>'student'], function () {
     ])->where(['subject'=>'(chinese | english | math)']);
 });
 
+//修改根路由'/'，使之可執行HomeController的indexc函數
+Route::get('/','HomeController@index');
+
 //新增路由'cool'
-Route::get('cool','cool\TestController@index');
-*/
+Route::get('cool','Cool\TestController@index');
+
 //修改路由'cool'，使之加入namespace路由'Cool'當中
-Route::group(['namespace'=>'Cool'],function (){
-    Route::get('cool','cool\TestController@index');
+Route::group(['namespace' => 'Cool'],function (){
+    Route::get('cool','TestController@index');
 });
